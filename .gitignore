@@ -116,4 +116,4 @@ GitHub.sublime-settings
 .history
 
 # database
-.dbdata/*
+admin/.dbdata/*
