@@ -47,11 +47,11 @@ class UserAPIView(APIView):
         user = random.choice(users)
         return Response({'id': user.id})
     
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # def post(self, request):
+    #     serializer = UserSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 
