@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import ProductViewSet
+from .views import ProductViewSet, UserAPIView
 
 urlpatterns = [
     path('products', ProductViewSet.as_view({
@@ -27,4 +27,5 @@ urlpatterns = [
         'put': 'update',
         'delete': 'destroy',
     })),
+    path('user', UserAPIView.as_view()),
 ]
