@@ -6,12 +6,14 @@ import random
 
 from .models import Product, User
 from .serializers import ProductSerializer, UserSerializer
+from .producer import publish
 
 class ProductViewSet(viewsets.ViewSet):
     def list(self, request):
         '''GET /api/products'''
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
+        publish()
         return Response(serializer.data)
 
     def create(self, request):
