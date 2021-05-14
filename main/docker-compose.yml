@@ -6,8 +6,8 @@ services:
             dockerfile: Dockerfile
         ports:
             - 8001:5000
-        volumes:
-            - .:/app
+        # volumes:
+        #     - .:/app
     db:
         image: mysql:5.7.22
         restart: always
