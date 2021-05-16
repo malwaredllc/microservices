@@ -13,7 +13,6 @@ class ProductViewSet(viewsets.ViewSet):
         '''GET /api/products'''
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
-        publish()
         return Response(serializer.data)
 
     def create(self, request):
@@ -21,6 +20,8 @@ class ProductViewSet(viewsets.ViewSet):
         serializer = ProductSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        # publish to rabbit mq
+        publish('product_created', serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def retrieve(self, request, pk=None): 
@@ -35,12 +36,16 @@ class ProductViewSet(viewsets.ViewSet):
         serializer = ProductSerializer(instance=product, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        # publish to rabbit mq
+        publish('product_updated', serializer.data)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def destroy(self, request, pk=None): 
         '''DELETE /api/products/<str: id>'''
         product = Product.objects.get(id=pk)
         product.delete()
+        # publish to rabbit mq
+        publish('product_deleted', pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class UserAPIView(APIView):
