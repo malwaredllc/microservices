@@ -16,6 +16,20 @@ const Products = () => {
         )();
     }, []);
 
+
+    const del = async (id: number) => {
+        if (window.confirm('Are you sure you want to delete this product?')) {
+            await fetch(`http://localhost:8000/api/products/${id}`, {
+                method: 'DELETE'
+            });
+
+            setProducts(products.filter(
+                (p: Product) => p.id !== id
+            ));
+        }
+    }
+
+
     return (
         <Wrapper>
             <div className="table-responsive">
@@ -37,7 +51,13 @@ const Products = () => {
                                 <td><img src={p.image} height="100"/></td>
                                 <td>{p.title}</td>
                                 <td>{p.likes}</td>
-                                <td></td>
+                                <td>
+                                    <div className="btn-group mr-2">
+                                        <a href="#" className="btn btn-sm btn-outline-secondary"
+                                            onClick={() => del(p.id)} 
+                                        >Delete</a>
+                                    </div>
+                                </td>
                             </tr>
                         );
                     })}
