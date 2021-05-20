@@ -1,38 +1,48 @@
-import React, { PropsWithChildren } from 'react';
+import React, { useEffect, useState } from 'react';
 import Wrapper from './Wrapper';
+import {Product} from '../interfaces/product';
 
 const Products = () => {
+
+    const [products, setProducts] = useState([]);
+
+    useEffect( () => {
+        (
+            async () => {
+                const response = await fetch('http://localhost:8000/api/products');
+                const data = await response.json();
+                setProducts(data);
+            }
+        )();
+    }, []);
+
     return (
         <Wrapper>
-            <div className="chartjs-size-monitor">
-            <div className="chartjs-size-monitor-expand">
-            <div className="chartjs-size-monitor-shrink">
-            <h2>Section title</h2>
-
             <div className="table-responsive">
-                <table className="table table-striped table-sm">
+                <table className="table table-striped">
                 <thead>
                     <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Likes</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>1,001</td>
-                    <td>random</td>
-                    <td>data</td>
-                    <td>placeholder</td>
-                    <td>text</td>
-                    </tr>
+                    {products.map((p: Product) => {
+                        return (
+                            <tr key={p.id}>
+                                <td>{p.id}</td>
+                                <td><img src={p.image} height="100"/></td>
+                                <td>{p.title}</td>
+                                <td>{p.likes}</td>
+                                <td></td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
                 </table>
-            </div>
-            </div>
-            </div>
             </div>
         </Wrapper>
     );
