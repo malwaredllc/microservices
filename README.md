@@ -13,3 +13,8 @@ Boiler plate web app built with microservice architecture using React, Django, F
 
 ### Preview
 
+Main page
+![main preivew](https://github.com/malwaredllc/microservices/blob/main/previews/main-preview.png)
+
+Admin page
+![admin preivew](https://github.com/malwaredllc/microservices/blob/main/previews/admin-preview.png)
