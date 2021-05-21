@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Wrapper from './Wrapper';
 import {Product} from '../interfaces/product';
+import {Link} from 'react-router-dom';
 
 const Products = () => {
 
@@ -32,6 +33,12 @@ const Products = () => {
 
     return (
         <Wrapper>
+            <div className="pt-3 pb-2 mb-3 border-bottom">
+                <div className="btn-toolbar mb-2 mb-md-0">
+                    <Link to='/admin/products/create' className="btn btn-sm btn-outline-secondary">Add</Link>
+                </div>
+            </div>
+
             <div className="table-responsive">
                 <table className="table table-striped">
                 <thead>
@@ -53,6 +60,8 @@ const Products = () => {
                                 <td>{p.likes}</td>
                                 <td>
                                     <div className="btn-group mr-2">
+                                        <Link to={`/admin/products/${p.id}/edit`} 
+                                            className="btn btn-sm btn-outline-secondary">Edit</Link>
                                         <a href="#" className="btn btn-sm btn-outline-secondary"
                                             onClick={() => del(p.id)} 
                                         >Delete</a>
