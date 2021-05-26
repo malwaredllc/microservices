@@ -1,5 +1,5 @@
 # microservices
-Boiler plate web app built with microservice architecture using React, Django, Flask, RabbitMQ.
+Boiler plate web app built with microservice architecture using React, Django, Flask, RabbitMQ. Built following a tutorial from freeCodeAcademy.
 
 ### Architecture
 - Admin backend service built with Django
